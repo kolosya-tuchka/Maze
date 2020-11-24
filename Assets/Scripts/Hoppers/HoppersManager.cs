@@ -13,7 +13,6 @@ public class HoppersManager : GameManager
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         timer.time = 15;
         StartCoroutine(ChangeLevel());
-        PlayerPrefs.SetInt("score", 0);
     }
     
     void Update()
