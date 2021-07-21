@@ -5,10 +5,16 @@ using UnityEngine;
 public class MapControls : MonoBehaviour
 {
     GameManager manager;
+    Spawner spawner;
+    Generator generator;
     private Vector3 point2;
+    Rigidbody rb;
     void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        rb = GetComponent<Rigidbody>();
+        manager = FindObjectOfType<GameManager>();
+        spawner = manager.GetComponent<Spawner>();
+        generator = manager.GetComponent<Generator>();
         Physics.gravity *= 8;
     }
 
@@ -21,7 +27,7 @@ public class MapControls : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                transform.RotateAround(transform.position, point2, 100 * Time.deltaTime);
+                transform.RotateAround(transform.position + rb.centerOfMass, point2, 100 * Time.deltaTime);
             }
 
         }

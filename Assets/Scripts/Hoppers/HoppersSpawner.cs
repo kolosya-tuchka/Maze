@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoppersSpawner : MonoBehaviour
+public class HoppersSpawner : Spawner
 {
     public HopperPrefab hopperPrefab;
-    public Vector3 CellSize = new Vector3(10, 0, 10);
     HoppersManager manager;
    
     public HopArray level;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoppersGenerator : MonoBehaviour
+public class HoppersGenerator : Generator
 {
-    public int minHeight, maxHeight, minWidth, maxWidth, height, width;
+
     public int hoppers;
 
     public HopArray GenerateHoppers()

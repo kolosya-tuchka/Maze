@@ -259,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773516158}
   - component: {fileID: 773516159}
+  - component: {fileID: 773516160}
   m_Layer: 0
   m_Name: map
   m_TagString: Untagged
@@ -292,6 +293,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142fbbad70ad14f44a9f6c68254861c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &773516160
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773516157}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1090129865
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,9 +354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8797b9fc44300a419bdb4191f5c1271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CellSize: {x: 10, y: 0, z: 10}
   hopperPrefab: {fileID: 1779985193172268096, guid: 266cfcb477a6c70468b89d8310730ba1,
     type: 3}
-  CellSize: {x: 10, y: 0, z: 10}
 --- !u!114 &1090129868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,13 +756,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560461893}
-  m_LocalRotation: {x: 0.727381, y: 0.0014426536, z: -0.0015286171, w: 0.68623066}
-  m_LocalPosition: {x: 66.1, y: 372.3, z: 32.2}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 37.9, y: 158.1, z: -109}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &1644922657
 GameObject:
   m_ObjectHideFlags: 0

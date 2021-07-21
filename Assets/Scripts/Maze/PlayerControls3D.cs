@@ -9,23 +9,17 @@ public class PlayerControls3D : MonoBehaviour
 
     private void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<MazeGameManager>();
+        manager =  FindObjectOfType<MazeGameManager>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
-
         if (other.gameObject.CompareTag("Bomb") && manager.gameState != GameManager.GameState.gameOver)
         {
             boom.transform.position = transform.position;
             boom.Play();
             Destroy(other.gameObject);
             manager.GameOver();
-        }
-
-        if (other.gameObject.CompareTag("Finish") && manager.gameState != GameManager.GameState.gameOver)
-        {
-            manager.gameState = GameManager.GameState.nextLevel;
         }
     }
 
@@ -37,6 +31,11 @@ public class PlayerControls3D : MonoBehaviour
             firework.Play();
             manager.score++;
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Finish") && manager.gameState != GameManager.GameState.gameOver)
+        {
+            manager.gameState = GameManager.GameState.nextLevel;
         }
     }
 }

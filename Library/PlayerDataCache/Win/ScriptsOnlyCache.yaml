@@ -941,4 +941,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Maze3D.unity
   - Assets/Scenes/Hoppers!.unity
-  playerPath: D:/Builds/Desktop/Tilt'em all/MonoBleedingEdge/Maze.exe
+  playerPath: D:/Builds/Desktop/Tilt'em all/Maze.exe

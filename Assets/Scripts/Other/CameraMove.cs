@@ -9,17 +9,14 @@ public class CameraMove : MonoBehaviour
     public float offset = 150;
     void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        StartCoroutine(Move());
+        manager = FindObjectOfType<GameManager>();
         transform.position = persuitObject.transform.position - transform.forward * offset;
     }
 
-    IEnumerator Move()
+    void FixedUpdate()
     {
-        while (!manager.IsGameOver())
-        {
-            transform.position = Vector3.Lerp(transform.position, persuitObject.transform.position - transform.forward * offset, 0.02f);
-            yield return null;
-        }
+        if (manager.IsGameOver()) return;
+        transform.position = Vector3.Lerp(transform.position, persuitObject.transform.position - transform.forward * offset, 0.02f);
     }
+
 }

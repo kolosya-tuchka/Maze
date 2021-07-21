@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     HoppersManager manager;
     void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<HoppersManager>();
+        manager = FindObjectOfType<HoppersManager>();
         text = GetComponent<Text>();
         StartCoroutine(Countdown());
     }
