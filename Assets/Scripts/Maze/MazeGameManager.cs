@@ -7,10 +7,12 @@ public class MazeGameManager : GameManager
     GameObject player;
     public GameObject bomb;
     MazeSpawner spawner;
-    void Start()
+    void Awake()
     {
+        playerStats = FindObjectOfType<PlayerStats>();
         player = GameObject.FindGameObjectWithTag("Player");
         spawner = GetComponent<MazeSpawner>();
+        postProcessing.SetActive(playerStats.settings.coolGraphics);
         StartCoroutine(ChangeLevel());
     }
 
@@ -30,9 +32,23 @@ public class MazeGameManager : GameManager
             map.transform.eulerAngles = Vector3.zero;
             player.transform.position = new Vector3(5, 2.275f, 5);
             spawner.Spawn();
+            levelScore = spawner.GetComponent<MazeGenerator>().distance / 5;
+            level++;
             gameState = GameState.playing;
+            playerStats.SetVolume(FindObjectsOfType<AudioSource>());
 
-            yield return new WaitUntil(IsNextLevel);
+            yield return new WaitUntil(() => IsNextLevel);
         }
+    }
+
+    public override void SavePlayer()
+    {
+        if (score > playerStats.bestScoreMaze) playerStats.bestScoreMaze = score;
+        base.SavePlayer();
+    }
+
+    public override void GameOver()
+    {
+        base.GameOver();
     }
 }

@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     private int score = 0;
+    public PlayerStats stats;
     Text scoreText;
     void Start()
     {
         scoreText = GetComponent<Text>();
-        score = PlayerPrefs.GetInt("score", score);
     }
 
     void Update()
     {
+        score = stats.money;
         scoreText.text = score.ToString();
     }
 }

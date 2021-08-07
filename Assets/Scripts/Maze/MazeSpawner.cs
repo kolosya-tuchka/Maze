@@ -7,7 +7,7 @@ public class MazeSpawner : MonoBehaviour
     public Maze maze;
     MazeGameManager manager;
 
-    private void Start()
+    private void Awake()
     {
         manager = GetComponent<MazeGameManager>();
     }

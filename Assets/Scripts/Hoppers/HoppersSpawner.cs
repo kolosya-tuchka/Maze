@@ -9,7 +9,7 @@ public class HoppersSpawner : Spawner
    
     public HopArray level;
 
-    private void Start()
+    private void Awake()
     {
         manager = GetComponent<HoppersManager>();
     }

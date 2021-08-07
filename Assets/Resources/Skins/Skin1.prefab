@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1410325739685834639}
   - component: {fileID: 1410325739685834633}
   - component: {fileID: 1410325739685834638}
-  - component: {fileID: 5298659249770473479}
   m_Layer: 0
   m_Name: Skin1
   m_TagString: Player
@@ -52,10 +51,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,16 +81,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5298659249770473479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410325739685834636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297a1c4b763ca7249a078d140986e43d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 0
+  m_AdditionalVertexStreams: {fileID: 0}

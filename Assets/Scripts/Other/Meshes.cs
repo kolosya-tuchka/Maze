@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class Meshes : MonoBehaviour
 {
-    public GameObject[] meshes;
-    int curSkin;
+    GameObject skin, trail;
     private void Start()
     {
-        meshes = Resources.LoadAll<GameObject>("Skins");
-        curSkin = PlayerPrefs.GetInt("Skin");
-        ActivateMesh();
+        var stats = FindObjectOfType<PlayerStats>();
+        skin = stats.skin;
+        trail = stats.trail;
+        ActivateMesh(skin);
+        ActivateMesh(trail);
     }
 
-    void ActivateMesh()
+    void ActivateMesh(GameObject obj)
     {
-        foreach (var obj in meshes)
+        if (obj == null) return;
+
+        var mesh = Instantiate(obj, transform.position, transform.rotation);
+        mesh.transform.parent = transform;
+        mesh.transform.localPosition = obj.transform.position;
+
+        if (obj == trail && GetComponent<PlayerControls3D>() != null)
         {
-            if (obj.GetComponent<Mesh>().index == curSkin)
-            {
-                var mesh = Instantiate(obj, transform.position, transform.rotation);
-                mesh.transform.parent = transform;
-            }
+            GetComponent<PlayerControls3D>().trail = obj.GetComponent<ParticleSystem>();
         }
     }
-
-
+ 
 }

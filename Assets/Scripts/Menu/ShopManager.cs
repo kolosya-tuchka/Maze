@@ -5,7 +5,16 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour {
 
     public List<ShopItem> Items;
-    public int ActiveSkinIndex;
+    public int ActiveIndex;
+    public PlayerStats stats;
+    public AudioSource BuySound;
+
+    public ShopType shopType;
+    public enum ShopType
+    {
+        skins, trails
+    }
+
 
     public void CheckItemButtons()
     {

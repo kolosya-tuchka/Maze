@@ -15,7 +15,7 @@ public class CameraMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (manager.IsGameOver()) return;
+        if (manager.IsGameOver) return;
         transform.position = Vector3.Lerp(transform.position, persuitObject.transform.position - transform.forward * offset, 0.02f);
     }
 

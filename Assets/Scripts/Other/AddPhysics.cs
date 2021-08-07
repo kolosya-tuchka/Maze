@@ -7,13 +7,15 @@ public class AddPhysics : MonoBehaviour
     GameManager manager;
     void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        manager = FindObjectOfType<GameManager>();
         StartCoroutine(Add());
     }
 
     IEnumerator Add()
     {
-        yield return new WaitUntil(manager.IsGameOver);
-        gameObject.AddComponent<Rigidbody>();
+        yield return new WaitUntil(() => manager.IsGameOver);
+        Destroy(gameObject, 15);
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
     }
 }

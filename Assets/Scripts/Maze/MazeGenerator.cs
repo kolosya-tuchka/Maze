@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeGenerator: MonoBehaviour
+public class MazeGenerator: Generator
 {
-    public int minWidth, maxWidth, minHeight, maxHeight, width, height;
-  
+    public MazeGeneratorCell finish;
+    public int distance;
+
     public Maze GenerateMaze()
     {
-        height = UnityEngine.Random.Range(minHeight, maxHeight + 1);
-        width = UnityEngine.Random.Range(minWidth, maxWidth + 1);
+        height = UnityEngine.Random.Range(minHeight, maxHeight + 1 + manager.level / 3) + manager.level / 5;
+        width = UnityEngine.Random.Range(minWidth, maxWidth + 1 + manager.level / 3) + manager.level / 5;
+
+        height = Mathf.Clamp(height, 5, 20);
+        width = Mathf.Clamp(width, 5, 20);
 
         MazeGeneratorCell[,] cells = new MazeGeneratorCell[width, height];
 
@@ -37,6 +41,26 @@ public class MazeGenerator: MonoBehaviour
 
         maze.cells = cells;
         maze.finishPosition = PlaceMazeExit(cells);
+        finish = cells[maze.finishPosition.x, maze.finishPosition.y];
+        distance = finish.DistanceFromStart;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (x + 1 == width || y + 1 == height)
+                {
+                    cells[x, y].Floor = false;
+                }
+                else
+                {
+                    cells[x, y].Floor = true;
+                    RandomChanges(cells[x, y]);
+                }
+            }
+        }
+        cells[maze.finishPosition.x, maze.finishPosition.y].Floor = false;
+        cells[maze.finishPosition.x, maze.finishPosition.y].Money = false;
 
         return maze;
     }
@@ -77,6 +101,31 @@ public class MazeGenerator: MonoBehaviour
         } while (stack.Count > 0);
     }
 
+    private void RandomChanges(MazeGeneratorCell b)
+    {
+
+        int rand = UnityEngine.Random.Range(1, 10);
+        if (rand == 3) b.Money = true;
+
+        Vector2 dist = new Vector2(Mathf.Abs(finish.X - b.X), Mathf.Abs(finish.Y - b.Y));
+        if (dist.magnitude < 2) return;
+
+        if (b.X + 1 != width && b.X != 0 && b.Y + 1 != height && b.Y != 0)
+        {
+            rand = UnityEngine.Random.Range(1, 3);
+            if (rand == 2)
+            {
+                rand = UnityEngine.Random.Range(1, 3);
+                switch (rand)
+                {
+                    case (1): b.WallLeft = false; break;
+                    case (2): b.WallBottom = false; break;
+                }
+            }
+
+        }
+    }
+
     private void RemoveWall(MazeGeneratorCell a, MazeGeneratorCell b)
     {
         if (a.X == b.X)
@@ -88,34 +137,6 @@ public class MazeGenerator: MonoBehaviour
         {
             if (a.X > b.X) a.WallLeft = false;
             else b.WallLeft = false;
-        }
-
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (x + 1 == width || y + 1 == height)
-                {
-                    b.Floor = true;
-                }
-            }
-        }
-
-        if (b.X + 1 != width && b.X != 0 && b.Y + 1 != height && b.Y != 0)
-        {
-            int d = UnityEngine.Random.Range(1, 3);
-            if (d == 2)
-            {
-                d = UnityEngine.Random.Range(1, 3);
-                switch (d)
-                {
-                    case (1): b.WallLeft = false; break;
-                    case (2): b.WallBottom = false; break;
-                }
-            }
-
-            d = UnityEngine.Random.Range(1, 10);
-            if (d == 3) b.Money = !b.Exit;
         }
 
     }

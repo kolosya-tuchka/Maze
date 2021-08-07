@@ -5,13 +5,15 @@ using UnityEngine;
 public class HoppersManager : GameManager
 {
     public int hoppers;
+    public AudioSource boom, goal;
     Timer timer;
 
-    void Start()
+    void Awake()
     {
-        gameOverCanvas.SetActive(false);
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
+        playerStats = FindObjectOfType<PlayerStats>();
+        timer = FindObjectOfType<Timer>();
         timer.time = 15;
+        postProcessing.SetActive(playerStats.settings.coolGraphics);
         StartCoroutine(ChangeLevel());
     }
     
@@ -19,7 +21,7 @@ public class HoppersManager : GameManager
     {
         if (gameState == GameState.playing)
         {
-            if (timer.time == 0)
+            if (timer.time <= 0)
                 GameOver();
 
             if (hoppers == 0)
@@ -39,9 +41,27 @@ public class HoppersManager : GameManager
             map.transform.eulerAngles = Vector3.zero;
             GetComponent<HoppersSpawner>().Spawn();
             gameState = GameState.playing;
-            timer.time += hoppers * 3;
+            score += levelScore;
+            level++;
+            levelScore = level / 5;
+            timer.time += Mathf.Clamp(hoppers, 1, 6) * 3;
+            playerStats.SetVolume(FindObjectsOfType<AudioSource>());
+            goal.Play();
 
-            yield return new WaitUntil(IsNextLevel);
+            yield return new WaitUntil(() => IsNextLevel);
         }
+    }
+
+    public override void SavePlayer()
+    {
+        if (score > playerStats.bestScoreHoppers) playerStats.bestScoreHoppers = score;
+        base.SavePlayer();
+    }
+
+    public override void GameOver()
+    {
+        boom.Play();
+        SavePlayer();
+        base.GameOver();
     }
 }

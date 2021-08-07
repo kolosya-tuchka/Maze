@@ -9,8 +9,13 @@ public class BallControlls : MonoBehaviour
     Timer timer;
     void Start()
     {
-        manager = GameObject.Find("Game Manager").GetComponent<HoppersManager>();
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
+        manager = FindObjectOfType<HoppersManager>();
+        timer = FindObjectOfType<Timer>();
+    }
+
+    private void Update()
+    {
+        if (manager.IsGameOver) Destroy(gameObject); 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,7 +24,7 @@ public class BallControlls : MonoBehaviour
         {
             firework.transform.position = transform.position;
             firework.Play();
-            manager.score++;
+            manager.money++;
             Destroy(other.gameObject);
         }
 
@@ -27,6 +32,7 @@ public class BallControlls : MonoBehaviour
         {
             firework.Play();
             manager.hoppers--;
+            manager.score++;
             Destroy(GetComponent<Rigidbody>());
             other.transform.parent.parent.GetComponent<HopperPrefab>().HopTop.SetActive(true);
             Destroy(other.gameObject);

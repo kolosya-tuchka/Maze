@@ -5,7 +5,7 @@ public class PlayerControls3D : MonoBehaviour
 {
     MazeGameManager manager;
     public ParticleSystem firework;
-    public ParticleSystem boom;
+    public ParticleSystem boom, trail;
 
     private void Start()
     {
@@ -29,12 +29,14 @@ public class PlayerControls3D : MonoBehaviour
         {
             firework.transform.position = transform.position;
             firework.Play();
-            manager.score++;
+            manager.money++;
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Finish") && manager.gameState != GameManager.GameState.gameOver)
         {
+            manager.score += manager.levelScore;
+            trail?.Clear();
             manager.gameState = GameManager.GameState.nextLevel;
         }
     }

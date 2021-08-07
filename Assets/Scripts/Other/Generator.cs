@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    public int minHeight, maxHeight, minWidth, maxWidth, height, width;
+    public GameManager manager;
+    public int minHeight, maxHeight, minWidth, maxWidth, height, width, moneyCount;
 }

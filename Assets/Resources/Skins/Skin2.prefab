@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3129935948957379399}
   - component: {fileID: 3129935948957379398}
   - component: {fileID: 3129935948957379397}
-  - component: {fileID: 4521521025609156125}
   m_Layer: 0
   m_Name: Skin2
   m_TagString: Player
@@ -80,16 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4521521025609156125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3129935948957379396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297a1c4b763ca7249a078d140986e43d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 2

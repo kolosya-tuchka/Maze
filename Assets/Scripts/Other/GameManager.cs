@@ -2,38 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public interface IGameManager
+{
+    void GameOver();
+    void SavePlayer();
+}
+
+
+public class GameManager : MonoBehaviour, IGameManager
 {
     public GameState gameState;
-    public GameObject map;
-    public int score;
-    public GameObject gameOverCanvas;
+    public GameObject map, postProcessing;
+    public PlayerStats playerStats;
+
+    public int score, money, levelScore, level;
+
+    public bool IsGameOver
+    {
+        get { return gameState == GameState.gameOver; }
+    }
+
+    public bool IsNextLevel
+    {
+        get { return gameState == GameState.nextLevel; }
+    }
+
 
     private void Start()
     {
-        gameOverCanvas.SetActive(false);
+        level = 0;
     }
 
     public enum GameState
     {
        playing, nextLevel, gameOver
     }
-    public bool IsNextLevel()
-    {
-        return gameState == GameState.nextLevel;
-    }
 
-    public bool IsGameOver()
+    public virtual void GameOver()
     {
-        return gameState == GameState.gameOver;
-    }
-
-    public void GameOver()
-    {
-        gameOverCanvas.SetActive(true);
         gameState = GameState.gameOver;
-        int allScore = PlayerPrefs.GetInt("score");
-        allScore += score;
-        PlayerPrefs.SetInt("score", allScore);
+    }
+
+    public virtual void SavePlayer()
+    {
+        playerStats.money += money;
+        SaveManager.SavePlayerStats(playerStats);
     }
 }
