@@ -36,7 +36,7 @@ public class PlayerControls3D : MonoBehaviour
         if (other.gameObject.CompareTag("Finish") && manager.gameState != GameManager.GameState.gameOver)
         {
             manager.score += manager.levelScore;
-            trail?.Clear();
+            if (trail != null) trail.Clear();
             manager.gameState = GameManager.GameState.nextLevel;
         }
     }
